@@ -1,0 +1,50 @@
+{
+  "sessions": [
+    {
+      "id": "7fe7f587-c2df-4fb8-adaf-47910d427d58",
+      "tabLayout": {
+        "type": "stack",
+        "width": 100,
+        "height": 100,
+        "tabs": [
+          {
+            "id": "ede863f6-7810-440b-b678-8de6d52606de",
+            "relativeUrl": "file://./tsconfig.json",
+            "additionalData": null
+          },
+          {
+            "id": "6c5ab276-a853-4f87-bc65-d62389e58e9e",
+            "relativeUrl": "file://./src/pages/tabs/tabs.html",
+            "additionalData": null
+          },
+          {
+            "id": "275934fe-f1d5-4733-88b9-eeed2f132ea1",
+            "relativeUrl": "file://./src/app/app.template.html",
+            "additionalData": null
+          },
+          {
+            "id": "87048102-0392-4efb-88c0-469683461ca5",
+            "relativeUrl": "file://./src/pages/schedule/schedule.html",
+            "additionalData": null
+          },
+          {
+            "id": "c369c72e-057c-4bca-a8d0-a0cce96e3af8",
+            "relativeUrl": "file://./src/pages/schedule/schedule.ts",
+            "additionalData": null
+          },
+          {
+            "id": "95c7ced8-4c8e-4789-81f5-89d5d3b964f0",
+            "relativeUrl": "file://./src/app/app.component.ts",
+            "additionalData": null
+          }
+        ],
+        "subItems": [],
+        "activeItemIndex": 0
+      },
+      "lastUsed": 1475771636882,
+      "selectedTabId": "95c7ced8-4c8e-4789-81f5-89d5d3b964f0",
+      "fileTreeExpanded": true
+    }
+  ],
+  "relativePathToTsconfig": "./tsconfig.json"
+}
