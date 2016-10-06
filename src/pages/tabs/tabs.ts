@@ -4,7 +4,7 @@ import { NavParams } from 'ionic-angular';
 
 import { AboutPage } from '../about/about';
 import { MapPage } from '../map/map';
-import { SchedulePage } from '../schedule/schedule';
+import { SchedulePage } from '../channel/channel';
 import { SpeakerListPage } from '../speaker-list/speaker-list';
 
 

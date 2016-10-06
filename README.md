@@ -123,9 +123,9 @@ ionic-conference-app/
 │    │    │    └── map.scss              * MapPage stylesheet
 │    │    │
 │    │    │── schedule/                  * Schedule tab page
-│    │    │    ├── schedule.html         * SchedulePage template
-│    │    │    └── schedule.ts           * SchedulePage code
-│    │    │    └── schedule.scss         * SchedulePage stylesheet
+│    │    │    ├── channel.html         * SchedulePage template
+│    │    │    └── channel.ts           * SchedulePage code
+│    │    │    └── channel.scss         * SchedulePage stylesheet
 │    │    │
 │    │    │── schedule-filter/            * Schedule Filter page
 │    │    │    ├── schedule-filter.html   * ScheduleFilterPage template
