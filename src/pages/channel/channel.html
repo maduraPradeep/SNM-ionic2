@@ -14,7 +14,7 @@
   <ion-toolbar no-border-top>
     <ion-searchbar color="primary"
                    [(ngModel)]="queryText"
-                   (ionInput)="updateSchedule()"
+                   (ionInput)="getDoctors()"
                    placeholder="Search doctor by name, hospital or speciality">
     </ion-searchbar>
   </ion-toolbar>
@@ -27,62 +27,27 @@
         <ion-avatar item-left>
           <img [src]="doctor.profile_pic">
         </ion-avatar>
-        {{doctor.name}}
-        <!--<button ion-button(click)="openContact(doctor)" clear item-right>
-          <ion-icon name="help-circle"></ion-icon>
-          Request Appointment
-        </button>-->
+        <h2>{{doctor.name}}</h2>
+        <p>
+          <ion-icon name="home"></ion-icon>
+          &nbsp;&nbsp;{{doctor.hospital}} hospital
+        </p>
+
       </ion-item>
-
+      <ion-row>
+        <ion-chip *ngFor="let speciality of doctor.speciality">
+          <ion-label> {{speciality}}</ion-label>
+        </ion-chip>
+      </ion-row>
     </ion-card-content>
-
     <ion-item>
-      <span item-left> <ion-icon name="home"></ion-icon>{{doctor.hospital}}</span>
-      <ion-chip *ngFor="let speciality of doctor.speciality" item-right>
-        <ion-label> {{speciality}}</ion-label>
-      </ion-chip>
+      <button ion-button color="primary" ion-button (click)="requestAppointment(doctor)">Request Appointment</button>
     </ion-item>
 
+
   </ion-card>
-  <ion-list #scheduleList [hidden]="shownSessions === 0">
-
-    <ion-item-group *ngFor="let group of groups" [hidden]="group.hide">
-
-      <ion-item-divider sticky>
-        {{group.time}}
-      </ion-item-divider>
-
-      <ion-item-sliding *ngFor="let session of group.sessions" #slidingItem
-                        [attr.track]="session.tracks[0] | lowercase" [hidden]="session.hide">
-
-        <button ion-item (click)="goToSessionDetail(session)">
-          <h3>{{session.name}}</h3>
-          <p>
-            {{session.timeStart}} &mdash;
-            {{session.timeEnd}}:
-            {{session.location}}
-          </p>
-        </button>
-
-        <ion-item-options>
-          <button ion-button color="favorite" (click)="addFavorite(slidingItem, session)"
-                  *ngIf="segment === 'all'">
-            Favorite
-          </button>
-          <button ion-button color="danger" (click)="removeFavorite(slidingItem, session, 'Remove Favorite')"
-                  *ngIf="segment === 'favorites'">
-            Remove
-          </button>
-        </ion-item-options>
-
-      </ion-item-sliding>
-
-    </ion-item-group>
-
-  </ion-list>
-
-  <ion-list-header [hidden]="shownSessions > 0">
-    No Sessions Found
+  <ion-list-header [hidden]="doctors.length">
+    No Doctors Found
   </ion-list-header>
 
 
