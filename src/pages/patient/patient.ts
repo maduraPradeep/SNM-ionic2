@@ -4,10 +4,11 @@ import {
   App,
   NavController,
   ActionSheet,
-  ActionSheetController
+  ActionSheetController,
+  AlertController, AlertController
 } from 'ionic-angular';
 
-import {DoctorService} from '../../providers/doctors-data';
+import {PatientService} from '../../providers/patient-data';
 
 @Component({
   selector: 'page-patient',
@@ -15,48 +16,58 @@ import {DoctorService} from '../../providers/doctors-data';
 })
 export class PatientPage {
   queryText = '';
-  doctors = [];
+  patients = [];
   actionSheet: ActionSheet;
 
-  constructor(
-    public app: App,
-    public navCtrl: NavController,
-    public doctorService: DoctorService,
-    public actionSheetCtrl: ActionSheetController) {
+  constructor(public app: App,
+              public navCtrl: NavController,
+              public patientService: PatientService,
+              public actionSheetCtrl: ActionSheetController,
+              private alertCtrl: AlertController) {
 
   }
 
   ionViewDidEnter() {
-    this.app.setTitle('Patient');
+    this.app.setTitle('Patients');
   }
 
   ngAfterViewInit() {
-    this.getDoctors();
+    this.getPatients();
   }
 
-  getDoctors() {
-    this.doctorService.search(this.queryText).then(data=> {
+  getPatients() {
+    this.patientService.search(this.queryText).then(data=> {
       console.log(data);
-      return this.doctors = data;
+      return this.patients = data;
     });
   };
 
-  requestAppointment(doctor) {
-    //let mode = this.config.get('mode');
-
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Contact with ' + doctor.name,
+  requestAccess(patient) {
+    let alert = this.alertCtrl.create({
+      title: 'Enter OTP',
+      inputs: [
+        {
+          name: 'Access code',
+          placeholder: 'Enter access code'
+        }
+      ],
       buttons: [
         {
-          text: `Request Appointment`,
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'View',
+          handler: data => {
+            console.log("TODO: Validate");
 
-          handler: () => {
-            window.open('mailto:' + doctor.email);
           }
         }
       ]
     });
-
-    actionSheet.present();
+    alert.present();
   }
 }

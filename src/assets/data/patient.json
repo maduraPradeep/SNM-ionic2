@@ -1,0 +1,34 @@
+[
+  {
+    "id": "0001",
+    "first_name": "Saman",
+    "last_name":"Perera",
+    "nic":"900203291V",
+    "mobile":"94778845713",
+    "profile_pic":"https://cdn4.iconfinder.com/data/icons/icoflat-2/512/avatar-64.png"
+  },
+  {
+    "id": "0002",
+    "first_name": "Nuwan",
+    "last_name":"Sameera",
+    "nic":"900203281V",
+    "mobile":"94778845713",
+    "profile_pic":"https://cdn4.iconfinder.com/data/icons/icoflat-2/512/avatar-64.png"
+  },
+  {
+    "id": "0003",
+    "first_name": "Randima",
+    "last_name":"Senadeera",
+    "nic":"900203291V",
+    "mobile":"94778845713",
+    "profile_pic":"https://cdn4.iconfinder.com/data/icons/icoflat-2/512/avatar-64.png"
+  },
+  {
+    "id": "0004",
+    "first_name": "Sagarika",
+    "last_name":"Samarasekara",
+    "nic":"900203291V",
+    "mobile":"94778845713",
+    "profile_pic":"https://cdn4.iconfinder.com/data/icons/icoflat-2/512/avatar-64.png"
+  }
+]

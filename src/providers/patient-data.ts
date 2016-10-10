@@ -38,7 +38,7 @@ export class PatientService {
       if (queryText&& queryText !== '') {
         queryText=queryText.toLowerCase();
         return data.filter((item) => {
-          return (item.name.toLowerCase().indexOf(queryText) > -1)||(item.hospital.toLowerCase().indexOf(queryText) > -1)||(item.speciality.join().toLowerCase().indexOf(queryText)>-1);
+          return (item.first_name.toLowerCase().indexOf(queryText) > -1)||(item.last_name.toLowerCase().indexOf(queryText) > -1);
         })
       }else{
         return data;
@@ -49,5 +49,8 @@ export class PatientService {
 
   getApproval(){
 
+  }
+  requestOTP(patient){
+    console.log("Sending otp...");
   }
 }
