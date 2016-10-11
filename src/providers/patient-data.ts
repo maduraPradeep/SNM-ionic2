@@ -34,23 +34,26 @@ export class PatientService {
 
   search(queryText = '') {
     return this.load().then(data => {
-      console.log("Query text:"+queryText)
-      if (queryText&& queryText !== '') {
-        queryText=queryText.toLowerCase();
+      console.log("Query text:" + queryText)
+      if (queryText && queryText !== '') {
+        queryText = queryText.toLowerCase();
         return data.filter((item) => {
-          return (item.first_name.toLowerCase().indexOf(queryText) > -1)||(item.last_name.toLowerCase().indexOf(queryText) > -1);
+          return (item.first_name.toLowerCase().indexOf(queryText) > -1) || (item.last_name.toLowerCase().indexOf(queryText) > -1);
         })
-      }else{
+      } else {
         return data;
       }
     });
 
   }
 
-  getApproval(){
+  getApproval() {
 
   }
-  requestOTP(patient){
+
+  requestOTP(patient, callback) {
+
     console.log("Sending otp...");
+    callback(null, patient);
   }
 }

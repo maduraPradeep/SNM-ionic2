@@ -23,7 +23,7 @@ import { ConferenceData } from '../providers/conference-data';
 import { DoctorService } from '../providers/doctors-data';
 import { UserData } from '../providers/user-data';
 import { PatientService } from '../providers/patient-data';
-
+import { PatientDetailsPage } from '../pages/patient-details/patient-details';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,8 @@ import { PatientService } from '../providers/patient-data';
     TabsPage,
     TutorialPage,
     ReportPage,
-    PatientPage
+    PatientPage,
+    PatientDetailsPage
   ],
   imports: [
     IonicModule.forRoot(ConferenceApp)
@@ -64,7 +65,8 @@ import { PatientService } from '../providers/patient-data';
     TabsPage,
     TutorialPage,
     ReportPage,
-    PatientPage
+    PatientPage,
+    PatientDetailsPage
   ],
   providers: [ConferenceData, UserData, Storage,DoctorService,PatientService]
 })

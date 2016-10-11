@@ -3,13 +3,11 @@ import {Component} from '@angular/core';
 import {
   App,
   NavController,
-  ActionSheet,
-  ActionSheetController,
-  AlertController, AlertController
+  AlertController
 } from 'ionic-angular';
 
 import {PatientService} from '../../providers/patient-data';
-
+import { PatientDetailsPage } from '../patient-details/patient-details';
 @Component({
   selector: 'page-patient',
   templateUrl: 'patient.html'
@@ -17,12 +15,10 @@ import {PatientService} from '../../providers/patient-data';
 export class PatientPage {
   queryText = '';
   patients = [];
-  actionSheet: ActionSheet;
 
   constructor(public app: App,
               public navCtrl: NavController,
               public patientService: PatientService,
-              public actionSheetCtrl: ActionSheetController,
               private alertCtrl: AlertController) {
 
   }
@@ -43,31 +39,39 @@ export class PatientPage {
   };
 
   requestAccess(patient) {
-    let alert = this.alertCtrl.create({
-      title: 'Enter OTP',
-      inputs: [
-        {
-          name: 'Access code',
-          placeholder: 'Enter access code'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'View',
-          handler: data => {
-            console.log("TODO: Validate");
+    var ctx=this;
+    this.patientService.requestOTP(patient, function (err, response) {
+      if (err) {
 
-          }
-        }
-      ]
+      } else {
+        let alert = ctx.alertCtrl.create({
+          title: 'Enter OTP',
+          inputs: [
+            {
+              name: 'Access code',
+              placeholder: 'Enter access code'
+            }
+          ],
+          buttons: [
+            {
+              text: 'Cancel',
+              role: 'cancel',
+              handler: data => {
+                console.log('Cancel clicked');
+              }
+            },
+            {
+              text: 'View',
+              handler: data => {
+                console.log(data);
+                ctx.navCtrl.push(PatientDetailsPage, patient);
+              }
+            }
+          ]
+        });
+        alert.present();
+      }
     });
-    alert.present();
+
   }
 }
