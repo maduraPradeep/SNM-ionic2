@@ -17,11 +17,13 @@ import { SpeakerDetailPage } from '../pages/speaker-detail/speaker-detail';
 import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
-
+import { ReportPage } from '../pages/report/report';
+import { PatientPage } from '../pages/patient/patient';
 import { ConferenceData } from '../providers/conference-data';
 import { DoctorService } from '../providers/doctors-data';
 import { UserData } from '../providers/user-data';
-
+import { PatientService } from '../providers/patient-data';
+import { PatientDetailsPage } from '../pages/patient-details/patient-details';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,10 @@ import { UserData } from '../providers/user-data';
     SpeakerDetailPage,
     SpeakerListPage,
     TabsPage,
-    TutorialPage
+    TutorialPage,
+    ReportPage,
+    PatientPage,
+    PatientDetailsPage
   ],
   imports: [
     IonicModule.forRoot(ConferenceApp)
@@ -58,8 +63,11 @@ import { UserData } from '../providers/user-data';
     SpeakerDetailPage,
     SpeakerListPage,
     TabsPage,
-    TutorialPage
+    TutorialPage,
+    ReportPage,
+    PatientPage,
+    PatientDetailsPage
   ],
-  providers: [ConferenceData, UserData, Storage,DoctorService]
+  providers: [ConferenceData, UserData, Storage,DoctorService,PatientService]
 })
 export class AppModule {}

@@ -141,7 +141,7 @@ ionic-conference-app/
 │    │    │    └── signup.ts             * SignupPage code
 │    │    │
 │    │    │── speaker-detail/            * Speaker Detail page
-│    │    │    ├── speaker-detail.html   * SpeakerDetailPage template
+│    │    │    ├── doctor-detail.html   * SpeakerDetailPage template
 │    │    │    └── speaker-detail.ts     * SpeakerDetailPage code
 │    │    │    └── speaker-detail.scss   * SpeakerDetailPage stylesheet
 │    │    │

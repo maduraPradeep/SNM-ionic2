@@ -8,7 +8,7 @@ import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
-
+import { PatientPage } from '../pages/patient/patient';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 
@@ -32,7 +32,8 @@ export class ConferenceApp {
   // the login page disables the left menu
   appPages: PageObj[] = [
     { title: 'Channel', component: TabsPage, icon: 'calendar' },
-    { title: 'Report', component: TabsPage, index: 1, icon: 'document' }/*,
+    { title: 'Report', component: TabsPage, index: 1, icon: 'document' },
+    { title: 'Patients', component: PatientPage, icon: 'document' }/*,
     { title: 'Map', component: TabsPage, index: 2, icon: 'map' },
     { title: 'About', component: TabsPage, index: 3, icon: 'information-circle' },*/
   ];
