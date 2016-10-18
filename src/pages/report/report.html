@@ -10,12 +10,59 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>report</ion-title>
+    <ion-title>Report</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-list>
+    <form #reportForm="ngForm" novalidate>
+      <ion-item>
+        <ion-label floating color="primary">Name</ion-label>
+        <ion-input [(ngModel)]="report.report_name" name="name" type="text" #name="ngModel" spellcheck="false"
+                   autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+      <p [hidden]="name.valid || submitted == false" color="danger" padding-left>
+        Name is required
+      </p>
+      <ion-item>
+        <ion-label floating color="primary">Type</ion-label>
+        <ion-select [(ngModel)]="report.report_type" name="type" #type="ngModel" required>
+          <ion-option value="blood" selected="true">Blood</ion-option>
+          <ion-option value="x-ray">X-Ray</ion-option>
+          <ion-option value="mri">MRI</ion-option>
+        </ion-select>
+      </ion-item>
+      <p [hidden]="type.valid || submitted == false" color="danger" padding-left>
+        Type is required
+      </p>
+      <ion-item>
+        <ion-label floating color="primary">Description</ion-label>
+        <ion-textarea [(ngModel)]="report.description" name="description" #description="ngModel"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label floating color="primary">Param 1</ion-label>
+        <ion-input [(ngModel)]="report.param_1" name="param_1" type="number" #param_1="ngModel">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating color="primary">Param 2</ion-label>
+        <ion-input [(ngModel)]="report.param_2" name="param_2" type="text" #param_2="ngModel">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating color="primary">Date</ion-label>
+        <ion-input [(ngModel)]="report.date" name="date" type="dare" #date="ngModel">
+        </ion-input>
+      </ion-item>
+      <ion-row responsive-sm>
+        <ion-col>
+          <button ion-button (click)="submitReport(reportForm)" type="submit" color="primary" block>Add Report</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-list>
 </ion-content>
