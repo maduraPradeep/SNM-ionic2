@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
-
+import {ReportService} from '../../providers/reports-data';
 /*
  Generated class for the PatientDetails page.
 
@@ -13,13 +13,23 @@ import {NavController, NavParams} from 'ionic-angular';
 })
 export class PatientDetailsPage {
   patient: any;
+  reports=[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public reportService: ReportService) {
     this.patient = navParams.data;
   }
 
   ionViewDidLoad() {
     console.log('Hello PatientDetails Page');
   }
+  ngAfterViewInit() {
+    this.getReports();
+  }
 
+  getReports() {
+    this.reportService.load().then(data=> {
+      console.log(data);
+      return this.reports = data;
+    });
+  };
 }

@@ -24,7 +24,7 @@ import { DoctorService } from '../providers/doctors-data';
 import { UserData } from '../providers/user-data';
 import { PatientService } from '../providers/patient-data';
 import { PatientDetailsPage } from '../pages/patient-details/patient-details';
-
+import { ReportService } from '../providers/reports-data';
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -68,6 +68,6 @@ import { PatientDetailsPage } from '../pages/patient-details/patient-details';
     PatientPage,
     PatientDetailsPage
   ],
-  providers: [ConferenceData, UserData, Storage,DoctorService,PatientService]
+  providers: [ConferenceData, UserData, Storage,DoctorService,PatientService,ReportService]
 })
 export class AppModule {}

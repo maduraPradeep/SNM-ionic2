@@ -21,5 +21,21 @@
     <p>Mobile: {{patient.mobile}}</p>
     <p>NIC: {{patient.nic}}</p>
   </div>
+  <ion-card *ngFor="let report of reports" class="speaker">
+    <ion-card-content class="outer-content">
+      <ion-item>
+        <h2>{{report.report_name}}</h2>
+        <p>{{report.description}}</p>
+        <p>Type: {{report.report_type}}</p>
+        <p>Param 1: {{report.param_1}}</p>
+        <p>Param 2: {{report.param_2}}</p>
+        <p>Date: {{report.date}}</p>
+      </ion-item>
+    </ion-card-content>
 
+
+  </ion-card>
+  <ion-list-header [hidden]="reports.length">
+    No Reports Found
+  </ion-list-header>
 </ion-content>
