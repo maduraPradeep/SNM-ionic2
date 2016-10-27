@@ -1,21 +1,28 @@
 /**
  * Created by Madura on 27/10/2016.
  */
-import {Storage} from '@ionic/storage';
-import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
-import {Injectable, NgZone} from '@angular/core';
-import {Observable} from 'rxjs/Rx';
+import { Storage } from '@ionic/storage';
+import { AuthHttp, JwtHelper, tokenNotExpired } from 'angular2-jwt';
+import { Injectable, NgZone } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 
+// Avoid name not found warnings
 declare var Auth0: any;
 declare var Auth0Lock: any;
-const CLIENTID="ABQ2GGN6rCeOGAFmg5ypJLrEINeV9g4K";
-const DOMAIN="madura.auth0.com";
+
 @Injectable()
 export class AuthService {
 
   jwtHelper: JwtHelper = new JwtHelper();
-  auth0 = new Auth0({clientID: CLIENTID, domain: DOMAIN});
-  lock = new Auth0Lock(CLIENTID,DOMAIN,{});
+  auth0 = new Auth0({clientID: 'ABQ2GGN6rCeOGAFmg5ypJLrEINeV9g4K', domain: 'madura.auth0.com'});
+  lock = new Auth0Lock('ABQ2GGN6rCeOGAFmg5ypJLrEINeV9g4K', 'madura.auth0.com', {
+   /* auth: {
+      redirect: false,
+      params: {
+        scope: 'openid offline_access',
+      }
+    }*/
+  });
   storage: Storage = new Storage();
   refreshSubscription: any;
   user: Object;
@@ -39,7 +46,7 @@ export class AuthService {
       this.storage.set('id_token', authResult.idToken);
       this.idToken = authResult.idToken;
 
-// Fetch profile information
+      // Fetch profile information
       this.lock.getProfile(authResult.idToken, (error, profile) => {
         if (error) {
           // Handle error
@@ -56,7 +63,7 @@ export class AuthService {
 
       this.storage.set('refresh_token', authResult.refreshToken);
       this.zoneImpl.run(() => this.user = authResult.profile);
-// Schedule a token refresh
+      // Schedule a token refresh
       this.scheduleRefresh();
 
     });

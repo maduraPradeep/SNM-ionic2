@@ -25,7 +25,21 @@ import { UserData } from '../providers/user-data';
 import { PatientService } from '../providers/patient-data';
 import { PatientDetailsPage } from '../pages/patient-details/patient-details';
 import { ReportService } from '../providers/reports-data';
-import {AuthService} from '../providers/auth-service';
+import { AuthConfig, AuthHttp } from 'angular2-jwt';
+import { AuthService } from '../providers/auth-service';
+import { Http } from '@angular/http';
+import { Storage } from '@ionic/storage';
+
+let storage: Storage = new Storage();
+
+export function getAuthHttp(http) {
+  return new AuthHttp(new AuthConfig({
+    globalHeaders: [{'Accept': 'application/json'}],
+    tokenGetter: (() => storage.get('id_token'))
+  }), http);
+}
+
+
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -69,6 +83,11 @@ import {AuthService} from '../providers/auth-service';
     PatientPage,
     PatientDetailsPage
   ],
-  providers: [ConferenceData, UserData, Storage,DoctorService,PatientService,ReportService,AuthService]
+  providers: [ConferenceData, UserData, Storage,DoctorService,PatientService,ReportService,AuthService,
+    {
+      provide: AuthHttp,
+      useFactory: getAuthHttp,
+      deps: [Http]
+    }]
 })
 export class AppModule {}
