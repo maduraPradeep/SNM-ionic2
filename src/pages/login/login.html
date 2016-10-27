@@ -13,7 +13,7 @@
     <div class="logo">
       <img src="assets/img/appicon.svg">
     </div>
-
+    <button ion-button (click)="authService.login()" type="submit" color="primary" block>Login</button>
     <form #loginForm="ngForm" novalidate>
       <ion-item>
         <ion-label floating color="primary">Username</ion-label>

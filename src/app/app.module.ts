@@ -25,6 +25,7 @@ import { UserData } from '../providers/user-data';
 import { PatientService } from '../providers/patient-data';
 import { PatientDetailsPage } from '../pages/patient-details/patient-details';
 import { ReportService } from '../providers/reports-data';
+import {AuthService} from '../providers/auth-service';
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -68,6 +69,6 @@ import { ReportService } from '../providers/reports-data';
     PatientPage,
     PatientDetailsPage
   ],
-  providers: [ConferenceData, UserData, Storage,DoctorService,PatientService,ReportService]
+  providers: [ConferenceData, UserData, Storage,DoctorService,PatientService,ReportService,AuthService]
 })
 export class AppModule {}

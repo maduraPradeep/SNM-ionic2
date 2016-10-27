@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { Events, MenuController, Nav, Platform } from 'ionic-angular';
+import {AuthService} from '../providers/auth-service';
 // import { Splashscreen, StatusBar } from 'ionic-native';
 
 import { AccountPage } from '../pages/account/account';
@@ -52,7 +53,8 @@ export class ConferenceApp {
     public userData: UserData,
     public menu: MenuController,
     platform: Platform,
-    confData: ConferenceData
+    confData: ConferenceData,
+    authService: AuthService
   ) {
     // Call any initial plugins when ready
     platform.ready().then(() => {
