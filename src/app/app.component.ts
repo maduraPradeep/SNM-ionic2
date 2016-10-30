@@ -1,17 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 
-import { Events, MenuController, Nav, Platform } from 'ionic-angular';
+import {Events, MenuController, Nav, Platform} from 'ionic-angular';
 // import { Splashscreen, StatusBar } from 'ionic-native';
 
-import { AccountPage } from '../pages/account/account';
-import { LoginPage } from '../pages/login/login';
-import { SignupPage } from '../pages/signup/signup';
-import { TabsPage } from '../pages/tabs/tabs';
-import { TutorialPage } from '../pages/tutorial/tutorial';
-import { PatientPage } from '../pages/patient/patient';
-import { ConferenceData } from '../providers/conference-data';
-import { UserData } from '../providers/user-data';
-
+import {AccountPage} from '../pages/account/account';
+import {LoginPage} from '../pages/login/login';
+import {SignupPage} from '../pages/signup/signup';
+import {TabsPage} from '../pages/tabs/tabs';
+import {PatientPage} from '../pages/patient/patient';
+import {ConferenceData} from '../providers/conference-data';
+import {UserData} from '../providers/user-data';
+import {TutorialPage} from '../pages/tutorial/tutorial';
+import {AuthService} from '../providers/auth-service';
 export interface PageObj {
   title: string;
   component: any;
@@ -31,29 +31,28 @@ export class ConferenceApp {
   // the left menu only works after login
   // the login page disables the left menu
   appPages: PageObj[] = [
-    { title: 'Channel', component: TabsPage, icon: 'calendar' },
-    { title: 'Report', component: TabsPage, index: 1, icon: 'document' },
-    { title: 'Patients', component: PatientPage, icon: 'people' }/*,
-    { title: 'Map', component: TabsPage, index: 2, icon: 'map' },
-    { title: 'About', component: TabsPage, index: 3, icon: 'information-circle' },*/
+    {title: 'Channel', component: TabsPage, icon: 'calendar'},
+    {title: 'Report', component: TabsPage, index: 1, icon: 'document'},
+    {title: 'Patients', component: PatientPage, icon: 'people'}/*,
+     { title: 'Map', component: TabsPage, index: 2, icon: 'map' },
+     { title: 'About', component: TabsPage, index: 3, icon: 'information-circle' },*/
   ];
   loggedInPages: PageObj[] = [
-    { title: 'Account', component: AccountPage, icon: 'person' },
-    { title: 'Logout', component: TabsPage, icon: 'log-out' }
+    {title: 'Account', component: AccountPage, icon: 'person'},
+    {title: 'Logout', component: TabsPage, icon: 'log-out'}
   ];
   loggedOutPages: PageObj[] = [
-    { title: 'Login', component: LoginPage, icon: 'log-in' },
-    { title: 'Signup', component: SignupPage, icon: 'person-add' }
+    {title: 'Login', component: LoginPage, icon: 'log-in'},
+    {title: 'Signup', component: SignupPage, icon: 'person-add'}
   ];
   rootPage: any = TutorialPage;
 
-  constructor(
-    public events: Events,
-    public userData: UserData,
-    public menu: MenuController,
-    platform: Platform,
-    confData: ConferenceData
-  ) {
+  constructor(public events: Events,
+              public userData: UserData,
+              public menu: MenuController,
+              platform: Platform,
+              confData: ConferenceData,
+              authService: AuthService) {
     // Call any initial plugins when ready
     platform.ready().then(() => {
       // StatusBar.styleDefault();
@@ -63,11 +62,14 @@ export class ConferenceApp {
     // load the conference data
     confData.load();
 
+    if (!authService.authenticated()) {
+      this.rootPage = LoginPage;
+    }
     // decide which menu items should be hidden by current login status stored in local storage
-    this.userData.hasLoggedIn().then((hasLoggedIn) => {
-      this.enableMenu(hasLoggedIn === 'true');
-    });
-
+    /*this.userData.hasLoggedIn().then((hasLoggedIn) => {
+     this.enableMenu(hasLoggedIn === 'true');
+     });*/
+    this.enableMenu(true);
     this.listenToLoginEvents();
   }
 
@@ -100,7 +102,12 @@ export class ConferenceApp {
     });
 
     this.events.subscribe('user:logout', () => {
+      this.nav.setRoot(LoginPage);
       this.enableMenu(false);
+    });
+    this.events.subscribe("user:authenticated", (user)=> {
+      this.nav.setRoot(TutorialPage);
+      this.enableMenu(true);
     });
   }
 

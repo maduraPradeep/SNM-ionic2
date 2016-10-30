@@ -28,7 +28,6 @@ import { ReportService } from '../providers/reports-data';
 import { AuthConfig, AuthHttp } from 'angular2-jwt';
 import { AuthService } from '../providers/auth-service';
 import { Http } from '@angular/http';
-import { Storage } from '@ionic/storage';
 
 let storage: Storage = new Storage();
 

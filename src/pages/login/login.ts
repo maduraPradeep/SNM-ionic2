@@ -20,7 +20,7 @@ export class LoginPage {
   }
 
   onLogin(form) {
-    this.authService.login();
+    console.log(this.authService.getProfile());
     this.submitted = true;
 
     if (form.valid) {
