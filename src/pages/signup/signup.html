@@ -7,11 +7,11 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="login-page">
+<ion-content>
 
   <ion-list>
     <div class="logo">
-      <img src="assets/img/appicon.svg">
+      <img src="assets/img/appicon.png">
     </div>
 
     <form #signupForm="ngForm" novalidate>
@@ -32,7 +32,30 @@
       <p [hidden]="password.valid || submitted == false" color="danger" padding-left>
         Password is required
       </p>
-
+      <ion-item>
+        <ion-label floating color="primary">First Name</ion-label>
+        <ion-input [(ngModel)]="signup.firstname" name="firstname" type="text" #firstname="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <p [hidden]="firstname.valid || submitted == false" color="danger" padding-left>
+        First Name is required
+      </p>
+      <ion-item>
+        <ion-label floating color="primary">Last Name</ion-label>
+        <ion-input [(ngModel)]="signup.lastname" name="lastname" type="text" #lastname="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <p [hidden]="lastname.valid || submitted == false" color="danger" padding-left>
+        Last Name is required
+      </p>
+      <ion-item>
+        <ion-label floating color="primary">Email</ion-label>
+        <ion-input [(ngModel)]="signup.email" name="email" type="email" #email="ngModel" required>
+        </ion-input>
+      </ion-item>
+      <p [hidden]="email.valid || submitted == false" color="danger" padding-left>
+        Email is required
+      </p>
       <div padding>
         <button ion-button (click)="onSignup(signupForm)" type="submit" block color="primary">Create</button>
       </div>
