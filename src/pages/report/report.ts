@@ -14,7 +14,7 @@ import { NavController } from 'ionic-angular';
 export class ReportPage {
 
   constructor(public navCtrl: NavController) {}
-  report: {report_name?: string, report_type?: string,description?:string,param_1?:number,param_2?:string,date?:date} = {};
+  report: {report_name?: string, report_type?: string,description?:string,param_1?:number,param_2?:string,date?:string} = {};
   submitted = false;
 
   onLogin(form) {

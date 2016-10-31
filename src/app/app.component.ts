@@ -31,9 +31,9 @@ export class ConferenceApp {
   // the left menu only works after login
   // the login page disables the left menu
   appPages: PageObj[] = [
-    {title: 'Channel', component: TabsPage, icon: 'calendar'},
-    {title: 'Report', component: TabsPage, index: 1, icon: 'document'},
-    {title: 'Patients', component: PatientPage, icon: 'people'}/*,
+    /* {title: 'Channel', component: TabsPage, icon: 'calendar'},
+     {title: 'Report', component: TabsPage, index: 1, icon: 'document'},
+     {title: 'Patients', component: PatientPage, icon: 'people'}*//*,
      { title: 'Map', component: TabsPage, index: 2, icon: 'map' },
      { title: 'About', component: TabsPage, index: 3, icon: 'information-circle' },*/
   ];
@@ -106,9 +106,29 @@ export class ConferenceApp {
       this.enableMenu(false);
     });
     this.events.subscribe("user:authenticated", (user)=> {
-      this.nav.setRoot(TutorialPage);
-      this.enableMenu(true);
+      console.log("USER");
+      console.log(user);
+
+      if (user) {
+        this.enableViews(user[0].roles);
+        this.enableMenu(true);
+      }
     });
+  }
+
+  enableViews(roles) {
+    if (roles.includes("patient")) {
+      this.nav.setRoot(TabsPage);
+      this.appPages=[{title: 'Channel', component: TabsPage, icon: 'calendar'},{title: 'Report', component: TabsPage, index: 1, icon: 'document'}];
+      //this.appPages.push({title: 'Report', component: TabsPage, index: 1, icon: 'document'});
+    }
+    if (roles.includes("doctor")) {
+      this.nav.setRoot(PatientPage);
+      this.appPages=[{title: 'Patients', component: PatientPage, icon: 'people'}];
+    }
+    if (roles.includes("admin")) {
+
+    }
   }
 
   enableMenu(loggedIn) {
