@@ -25,4 +25,7 @@ export class ReportPage {
      // this.navCtrl.push(TabsPage);
     }
   }
+  submitReport(report){
+
+  }
 }
