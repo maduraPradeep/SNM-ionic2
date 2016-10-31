@@ -103,6 +103,7 @@ export class ConferenceApp {
 
     this.events.subscribe('user:logout', () => {
       this.nav.setRoot(LoginPage);
+      this.appPages=[];
       this.enableMenu(false);
     });
     this.events.subscribe("user:authenticated", (user)=> {
