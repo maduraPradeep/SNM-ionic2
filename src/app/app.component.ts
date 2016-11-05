@@ -12,6 +12,7 @@ import {ConferenceData} from '../providers/conference-data';
 import {UserData} from '../providers/user-data';
 import {TutorialPage} from '../pages/tutorial/tutorial';
 import {AuthService} from '../providers/auth-service';
+import {DoctorApprovePage} from '../pages/doctor-approve/doctor-approve';
 export interface PageObj {
   title: string;
   component: any;
@@ -128,7 +129,8 @@ export class ConferenceApp {
       this.appPages=[{title: 'Patients', component: PatientPage, icon: 'people'}];
     }
     if (roles.includes("admin")) {
-
+      this.nav.setRoot(DoctorApprovePage);
+      this.appPages=[{title: 'Approve', component: DoctorApprovePage, icon: 'add-circle'}];
     }
   }
 

@@ -1,0 +1,46 @@
+<!--
+  Generated template for the DoctorApprove page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let doctor of doctors" class="speaker">
+    <ion-card-content class="outer-content">
+      <ion-item>
+        <ion-avatar item-left>
+          <img [src]="doctor.profile_pic">
+        </ion-avatar>
+        <h2>{{doctor.name}}</h2>
+        <p>
+          <ion-icon name="home"></ion-icon>
+          &nbsp;&nbsp;{{doctor.hospital}} hospital
+        </p>
+
+      </ion-item>
+      <ion-row>
+        <ion-chip *ngFor="let speciality of doctor.speciality">
+          <ion-label> {{speciality}}</ion-label>
+        </ion-chip>
+      </ion-row>
+    </ion-card-content>
+    <ion-item>
+      <button ion-button color="primary" ion-button (click)="approve(doctor)">Approve</button>
+    </ion-item>
+
+
+  </ion-card>
+  <ion-list-header [hidden]="doctors.length">
+    No Pending Requests
+  </ion-list-header>
+
+
+</ion-content>

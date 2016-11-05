@@ -28,6 +28,7 @@ import { ReportService } from '../providers/reports-data';
 import { AuthConfig, AuthHttp } from 'angular2-jwt';
 import { AuthService } from '../providers/auth-service';
 import { Http } from '@angular/http';
+import {DoctorApprovePage} from '../pages/doctor-approve/doctor-approve';
 
 let storage: Storage = new Storage();
 
@@ -57,7 +58,8 @@ export function getAuthHttp(http) {
     TutorialPage,
     ReportPage,
     PatientPage,
-    PatientDetailsPage
+    PatientDetailsPage,
+    DoctorApprovePage
   ],
   imports: [
     IonicModule.forRoot(ConferenceApp)
@@ -80,7 +82,8 @@ export function getAuthHttp(http) {
     TutorialPage,
     ReportPage,
     PatientPage,
-    PatientDetailsPage
+    PatientDetailsPage,
+    DoctorApprovePage
   ],
   providers: [ConferenceData, UserData, Storage,DoctorService,PatientService,ReportService,AuthService,
     {
