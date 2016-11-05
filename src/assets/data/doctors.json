@@ -8,7 +8,8 @@
       "kidney"
     ],
     "availability": "3.00 pm - 5.00 pm",
-    "profile_pic":"https://cdn4.iconfinder.com/data/icons/icoflat-2/512/avatar-64.png"
+    "profile_pic":"https://cdn4.iconfinder.com/data/icons/icoflat-2/512/avatar-64.png",
+    "verified":"true"
   },
   {
     "id": "0002",
@@ -18,7 +19,8 @@
       "Neurology"
     ],
     "availability": "12.00 pm - 8.00 pm",
-    "profile_pic":"https://cdn4.iconfinder.com/data/icons/icoflat-2/512/avatar-64.png"
+    "profile_pic":"https://cdn4.iconfinder.com/data/icons/icoflat-2/512/avatar-64.png",
+    "verified":"false"
   },
   {
     "id": "0003",
@@ -29,7 +31,8 @@
       "kidney"
     ],
     "availability": "9.00 am - 5.00 pm",
-    "profile_pic":"https://cdn4.iconfinder.com/data/icons/icoflat-2/512/avatar-64.png"
+    "profile_pic":"https://cdn4.iconfinder.com/data/icons/icoflat-2/512/avatar-64.png",
+    "verified":"true"
   },
   {
     "id": "0004",
@@ -39,6 +42,7 @@
       "Phsycology"
     ],
     "availability": "3.00 pm - 5.00 pm",
-    "profile_pic":"https://cdn4.iconfinder.com/data/icons/icoflat-2/512/avatar-64.png"
+    "profile_pic":"https://cdn4.iconfinder.com/data/icons/icoflat-2/512/avatar-64.png",
+    "verified":"true"
   }
 ]

@@ -8,6 +8,7 @@ import {Http} from '@angular/http';
 @Injectable()
 export class DoctorService {
   data: any;
+  filter: any;
 
   constructor(public http: Http) {
   }
@@ -33,17 +34,31 @@ export class DoctorService {
   }
 
   search(queryText = '') {
-    return this.load().then(data => {
-      console.log("Query text:"+queryText)
-      if (queryText&& queryText !== '') {
-        queryText=queryText.toLowerCase();
+    return this.filterData(this.filter).then(data => {
+      console.log("Query text:" + queryText)
+      if (queryText && queryText !== '') {
+        queryText = queryText.toLowerCase();
         return data.filter((item) => {
-          return (item.name.toLowerCase().indexOf(queryText) > -1)||(item.hospital.toLowerCase().indexOf(queryText) > -1)||(item.speciality.join().toLowerCase().indexOf(queryText)>-1);
+          return (item.name.toLowerCase().indexOf(queryText) > -1) || (item.hospital.toLowerCase().indexOf(queryText) > -1) || (item.speciality.join().toLowerCase().indexOf(queryText) > -1);
         })
-      }else{
+      } else {
         return data;
       }
     });
 
+  }
+
+  setFilter(filter) {
+    this.filter = filter;
+  }
+
+  filterData(filter) {
+    return this.load().then(data=> {
+      if (filter)
+        return data.filter((item)=> {
+          return item[filter.key] === filter.value;
+        });
+      else return this.data;
+    });
   }
 }

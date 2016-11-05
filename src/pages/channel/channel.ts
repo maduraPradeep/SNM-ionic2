@@ -17,7 +17,6 @@ export class SchedulePage {
   queryText = '';
   doctors = [];
   actionSheet: ActionSheet;
-
   constructor(
               public app: App,
               public navCtrl: NavController,
@@ -31,6 +30,7 @@ export class SchedulePage {
   }
 
   ngAfterViewInit() {
+    this.doctorService.setFilter({"key":"verified","value":"true"});
     this.getDoctors();
   }
 
