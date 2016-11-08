@@ -4,14 +4,19 @@
 import {Injectable} from '@angular/core';
 
 
-import {Http} from '@angular/http';
+import {Http,Headers} from '@angular/http';
 @Injectable()
 export class DoctorService {
   data: any;
   filter: any;
+  apiUrl: "https://localhost:8243/doctor/1.0.0/";
 
   constructor(public http: Http) {
   }
+    createAuthorizationHeader(headers:Headers) {
+        headers.append('Authorization','Bearer 4ceae6ae-587e-33f9-a603-d768cdaea67a');
+        headers.append('Content-Type','application/json');
+    }
 
   load() {
     if (this.data) {
@@ -33,6 +38,15 @@ export class DoctorService {
     });
   }
 
+  signup(userObj) {
+      let headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    return new Promise(resolve => {
+      this.http.post('http://localhost:8280/doctor/1.0.0/signup',JSON.stringify(userObj),{headers:headers}).subscribe(res => {
+        resolve(res.json());
+      })
+    });
+  }
   search(queryText = '') {
     return this.filterData(this.filter).then(data => {
       console.log("Query text:" + queryText)

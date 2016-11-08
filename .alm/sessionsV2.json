@@ -36,14 +36,25 @@
             "id": "95c7ced8-4c8e-4789-81f5-89d5d3b964f0",
             "relativeUrl": "file://./src/app/app.component.ts",
             "additionalData": null
+          },
+          {
+            "id": "cd8da636-1da4-4a21-bff9-832d014daf16",
+            "relativeUrl": "file://./src/pages/signup/signup.ts",
+            "additionalData": null
+          },
+          {
+            "id": "ec2c0230-2ede-4cbb-85db-92c79bb9686c",
+            "relativeUrl": "file://./src/pages/signup/signup.html",
+            "additionalData": null
           }
         ],
         "subItems": [],
         "activeItemIndex": 0
       },
-      "lastUsed": 1475771636882,
-      "selectedTabId": "95c7ced8-4c8e-4789-81f5-89d5d3b964f0",
-      "fileTreeExpanded": true
+      "lastUsed": 1478416460039,
+      "selectedTabId": "ec2c0230-2ede-4cbb-85db-92c79bb9686c",
+      "fileTreeExpanded": true,
+      "errorsExpanded": false
     }
   ],
   "relativePathToTsconfig": "./tsconfig.json"

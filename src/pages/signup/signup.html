@@ -13,7 +13,10 @@
     <div class="logo">
       <img src="assets/img/appicon.png">
     </div>
-
+    <ion-item>
+      <ion-label>I am a Doctor</ion-label>
+      <ion-toggle value="foo" checked="false"  [(ngModel)]="isDoctor"></ion-toggle>
+    </ion-item>
     <form #signupForm="ngForm" novalidate>
       <ion-item>
         <ion-label floating color="primary">Username</ion-label>
@@ -32,6 +35,7 @@
       <p [hidden]="password.valid || submitted == false" color="danger" padding-left>
         Password is required
       </p>
+      <div *ngIf="!isDoctor">
       <ion-item>
         <ion-label floating color="primary">First Name</ion-label>
         <ion-input [(ngModel)]="signup.firstname" name="firstname" type="text" #firstname="ngModel" required>
@@ -48,6 +52,7 @@
       <p [hidden]="lastname.valid || submitted == false" color="danger" padding-left>
         Last Name is required
       </p>
+        </div>
       <ion-item>
         <ion-label floating color="primary">Email</ion-label>
         <ion-input [(ngModel)]="signup.email" name="email" type="email" #email="ngModel" required>
@@ -56,8 +61,34 @@
       <p [hidden]="email.valid || submitted == false" color="danger" padding-left>
         Email is required
       </p>
+      <div *ngIf="isDoctor">
+        <ion-item>
+          <ion-label floating color="primary">Name</ion-label>
+          <ion-input [(ngModel)]="signup.name" name="name" type="text" #name="ngModel" required>
+          </ion-input>
+        </ion-item>
+        <p [hidden]="name.valid || submitted == false" color="danger" padding-left>
+          Name is required
+        </p>
+        <ion-item>
+          <ion-label floating color="primary">Hospital</ion-label>
+          <ion-input [(ngModel)]="signup.hospital" name="hospital" type="text" #hospital="ngModel" required>
+          </ion-input>
+        </ion-item>
+        <p [hidden]="hospital.valid || submitted == false" color="danger" padding-left>
+          Hospital is required
+        </p>
+        <ion-item>
+          <ion-label floating color="primary">Speciality</ion-label>
+          <ion-input [(ngModel)]="signup.speciality" name="speciality" type="text" #speciality="ngModel" required>
+          </ion-input>
+        </ion-item>
+        <p [hidden]="speciality.valid || submitted == false" color="danger" padding-left>
+          Speciality is required
+        </p>
+      </div>
       <div padding>
-        <button ion-button (click)="onSignup(signupForm)" type="submit" block color="primary">Create</button>
+        <button ion-button (click)="onSignup(signupForm,isDoctor)" type="submit" block color="primary">Create</button>
       </div>
     </form>
   </ion-list>
