@@ -20,13 +20,29 @@ export class DoctorApprovePage {
     console.log('Hello DoctorApprove Page');
   }
   ngAfterViewInit() {
-    this.doctorService.filterData({"key":"verified","value":"false"}).then(data=> {
-      console.log(data);
-      return this.doctors = data;
-    });
+this.load();
+
+  }
+
+  load(){
+      this.doctorService.loadPendingList().then(data=> {
+          console.log(data);
+          try {
+              this.doctors=[];
+              let nameList = data['pending']['doctors'];
+              if (nameList)
+                  this.doctors = (nameList instanceof Array ? nameList : [nameList]) || [];
+          }catch(err){
+              console.log(err);
+          }
+          return data;
+      });
   }
   approve(doctor){
-
+this.doctorService.approve(doctor).then(data=>{
+    console.log(data);
+    this.load();
+});
   }
 
 }

@@ -23,8 +23,8 @@
     "ionicons": "^3.0.0"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "0.0.36",
-    "typescript": "^2.0.3"
+    "@ionic/app-scripts": "0.0.38",
+    "typescript": "^2.0.8"
   },
   "cordovaPlugins": [
     "cordova-plugin-whitelist",

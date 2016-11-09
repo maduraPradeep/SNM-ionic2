@@ -9,9 +9,10 @@ import {Http,Headers} from '@angular/http';
 export class DoctorService {
   data: any;
   filter: any;
-  apiUrl: "https://localhost:8243/doctor/1.0.0/";
+  apiUrl:any;
 
   constructor(public http: Http) {
+      this.apiUrl= "http://localhost:8280/doctor/1.0.0/";
   }
     createAuthorizationHeader(headers:Headers) {
         headers.append('Authorization','Bearer 4ceae6ae-587e-33f9-a603-d768cdaea67a');
@@ -41,8 +42,9 @@ export class DoctorService {
   signup(userObj) {
       let headers = new Headers();
     this.createAuthorizationHeader(headers);
+      let url=this.apiUrl+'signup';
     return new Promise(resolve => {
-      this.http.post('http://localhost:8280/doctor/1.0.0/signup',JSON.stringify(userObj),{headers:headers}).subscribe(res => {
+      this.http.post(url,JSON.stringify(userObj),{headers:headers}).subscribe(res => {
         resolve(res.json());
       })
     });
@@ -74,5 +76,28 @@ export class DoctorService {
         });
       else return this.data;
     });
+  }
+
+  loadPendingList(){
+      let headers = new Headers();
+      this.createAuthorizationHeader(headers);
+      let url=this.apiUrl+'pending';
+      console.log(url);
+      return new Promise(resolve => {
+          this.http.get(url,{headers:headers}).subscribe(res => {
+              resolve(res.json());
+          })
+      });
+  }
+
+  approve(doctor){
+      let headers = new Headers();
+      this.createAuthorizationHeader(headers);
+      let url=this.apiUrl+doctor+'/approve';
+      return new Promise(resolve => {
+          this.http.post(url,{},{headers:headers}).subscribe(res => {
+              resolve(res);
+          })
+      });
   }
 }
