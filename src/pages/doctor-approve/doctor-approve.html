@@ -16,8 +16,21 @@
   <ion-card *ngFor="let doctor of doctors" class="speaker">
     <ion-card-content class="outer-content">
       <ion-item>
-        <h2>{{doctor}}</h2>
+        <ion-avatar item-left>
+          <img [src]="doctor.profile_pic">
+        </ion-avatar>
+        <h2>{{doctor.name}}</h2>
+        <p>
+          <ion-icon name="home"></ion-icon>
+          &nbsp;&nbsp;{{doctor.hospital}} hospital
+        </p>
+
       </ion-item>
+      <ion-row>
+        <ion-chip *ngFor="let speciality of doctor.speciality">
+          <ion-label> {{speciality}}</ion-label>
+        </ion-chip>
+      </ion-row>
     </ion-card-content>
     <ion-item>
       <button ion-button color="primary" ion-button (click)="approve(doctor)">Approve</button>
@@ -28,6 +41,4 @@
   <ion-list-header [hidden]="doctors.length">
     No Pending Requests
   </ion-list-header>
-
-
 </ion-content>

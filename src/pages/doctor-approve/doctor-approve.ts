@@ -25,7 +25,12 @@ this.load();
   }
 
   load(){
-      this.doctorService.loadPendingList().then(data=> {
+      this.doctorService.filterData({"key":"verified","value":"false"}).then(data=> {
+          console.log(data);
+          return this.doctors = data;
+      });
+     /* this.doctorService.loadPendingList().then(data=> {
+
           console.log(data);
           try {
               this.doctors=[];
@@ -36,7 +41,7 @@ this.load();
               console.log(err);
           }
           return data;
-      });
+      });*/
   }
   approve(doctor){
 this.doctorService.approve(doctor).then(data=>{

@@ -5,14 +5,15 @@ import {Storage} from '@ionic/storage';
 import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import {Injectable, NgZone} from '@angular/core';
 import {Observable} from 'rxjs/Rx';
-
+import {Http,Headers} from '@angular/http';
 // Avoid name not found warnings
 declare var Auth0: any;
 declare var Auth0Lock: any;
 import {Events} from 'ionic-angular';
 @Injectable()
 export class AuthService {
-
+auth0Token:string;
+ auth0Url:string;
   jwtHelper: JwtHelper = new JwtHelper();
   auth0 = new Auth0({clientID: 'ABQ2GGN6rCeOGAFmg5ypJLrEINeV9g4K', domain: 'madura.auth0.com'});
   lock = new Auth0Lock('ABQ2GGN6rCeOGAFmg5ypJLrEINeV9g4K', 'madura.auth0.com', {
@@ -29,9 +30,11 @@ export class AuthService {
   zoneImpl: NgZone;
   idToken: string;
 events:any;
-  constructor(private authHttp: AuthHttp, zone: NgZone, events: Events) {
+  constructor(private authHttp: AuthHttp, zone: NgZone, events: Events,public http: Http) {
     this.zoneImpl = zone;
     this.events=events;
+    this.auth0Token="Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIyQmpMaFVFN0Mwb3lVYzB1TWpQTDh1UWM5blVhSVVPVyIsInNjb3BlcyI6eyJ1c2VycyI6eyJhY3Rpb25zIjpbImNyZWF0ZSIsInJlYWQiLCJ1cGRhdGUiLCJkZWxldGUiXX19LCJpYXQiOjE0Nzg4MTA0MjIsImp0aSI6Ijc4OTlhODRkOGY1MDdiYTE2ZTZiMWEzYjVkYTc3NDQ4In0.JLVBdR15Jj33kGu7IIKZ1a2k5iuA-TqymubTgMfWSVc";
+    this. auth0Url="https://madura.auth0.com/api/v2/users";
     // Check if there is a profile saved in local storage
     this.storage.get('profile').then(profile => {
       this.user = JSON.parse(profile);
@@ -178,5 +181,19 @@ events:any;
       console.log(error);
     });
 
+  }
+  createAuthorizationHeader(headers:Headers) {
+    headers.append('Authorization',this.auth0Token);
+    headers.append('Content-Type','application/json');
+  }
+  public signup(userObj){
+    let headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    let url=this.auth0Url;
+    return new Promise(resolve => {
+      this.http.post(url,JSON.stringify(userObj),{headers:headers}).subscribe(res => {
+        resolve(res.json());
+      })
+    });
   }
 }
