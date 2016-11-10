@@ -10,7 +10,6 @@ import {TabsPage} from '../pages/tabs/tabs';
 import {PatientPage} from '../pages/patient/patient';
 import {ConferenceData} from '../providers/conference-data';
 import {UserData} from '../providers/user-data';
-import {TutorialPage} from '../pages/tutorial/tutorial';
 import {AuthService} from '../providers/auth-service';
 import {DoctorApprovePage} from '../pages/doctor-approve/doctor-approve';
 export interface PageObj {
@@ -46,7 +45,7 @@ export class ConferenceApp {
     {title: 'Login', component: LoginPage, icon: 'log-in'},
     {title: 'Signup', component: SignupPage, icon: 'person-add'}
   ];
-  rootPage: any = TutorialPage;
+  rootPage: any = LoginPage;
 
   constructor(public events: Events,
               public userData: UserData,
