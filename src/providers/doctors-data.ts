@@ -135,16 +135,19 @@ console.log(res);
               resolve(res);
           })
       });*/
-     return new Promise(resolve => {
-         this.load().then(doctors=> {
-             doctors.forEach(item=> {
-                 if(item.id === doctor.id){
-                     item.verified="true";
-                     this.updateStorage();
-                     resolve(this.data);
-                 }
-             });
-         });
-     });
+    return  this.authService.setVerify(true,doctor.id).then(res=>{
+          return new Promise(resolve => {
+              this.load().then(doctors=> {
+                  doctors.forEach(item=> {
+                      if(item.id === doctor.id){
+                          item.verified="true";
+                          this.updateStorage();
+                          resolve(this.data);
+                      }
+                  });
+              });
+          });
+      })
+
   }
 }

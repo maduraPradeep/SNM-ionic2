@@ -196,4 +196,15 @@ events:any;
       })
     });
   }
+  public setVerify(status,userId){
+    let headers = new Headers();
+    this.createAuthorizationHeader(headers);
+    let request={ "email_verified": status };
+    let url=this.auth0Url+"/"+userId;
+    return new Promise(resolve => {
+      this.http.patch(url,JSON.stringify(request),{headers:headers}).subscribe(res => {
+        resolve(res.json());
+      })
+    });
+  }
 }
