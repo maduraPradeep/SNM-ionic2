@@ -62,7 +62,7 @@ export class DoctorService {
         resolve(res.json());
       })
     });*/
-      let auth0User={"connection":"Username-Password-Authentication","email":userObj.email,"username":userObj.namename,"password":userObj.password,"user_metadata":{},"email_verified":false,"app_metadata":{"roles":["doctor"]}};
+      let auth0User={"connection":"Username-Password-Authentication","email":userObj.email,"username":userObj.namename,"password":userObj.password,"user_metadata":{},"email_verified":false,"app_metadata":{"roles":["doctor"]},"name":userObj.name};
       return new Promise(resolve => {
           this.authService.signup(auth0User).then(res=>{
 console.log(res);
@@ -71,7 +71,7 @@ console.log(res);
                   userObj.profile_pic = "https://cdn4.iconfinder.com/data/icons/icoflat-2/512/avatar-64.png";
                   userObj.availability = "9.00 a.m. - 5 p.m.";
                   userObj.verified = "false";
-                  userObj.id = (Math.random() *1000).toString();
+                  userObj.id =res['user_id'];
                   this.data.push(userObj);
                   this.updateStorage();
                   console.log(userObj);

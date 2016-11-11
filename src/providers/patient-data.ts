@@ -5,11 +5,12 @@ import {Injectable} from '@angular/core';
 
 
 import {Http} from '@angular/http';
+import {AuthService} from "./auth-service";
 @Injectable()
 export class PatientService {
   data: any;
 
-  constructor(public http: Http) {
+  constructor(public http: Http,public authService:AuthService) {
   }
 
   load() {
@@ -55,5 +56,15 @@ export class PatientService {
 
     console.log("Sending otp...");
     callback(null, patient);
+  }
+
+  signup(userObj){
+    let auth0User={"connection":"Username-Password-Authentication","email":userObj.email,"username":userObj.namename,"password":userObj.password,"user_metadata":{},"email_verified":false,"app_metadata":{"roles":["patient"]},"name":userObj.name};
+    return new Promise(resolve => {
+      this.authService.signup(auth0User).then(res=> {
+        console.log(res);
+        resolve(res);
+      });
+    });
   }
 }
