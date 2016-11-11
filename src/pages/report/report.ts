@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {ReportService} from "../../providers/reports-data";
 
 /*
   Generated class for the Report page.
@@ -13,7 +14,7 @@ import { NavController } from 'ionic-angular';
 })
 export class ReportPage {
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController,public reportService:ReportService) {}
   report: {report_name?: string, report_type?: string,description?:string,param_1?:number,param_2?:string,date?:string} = {};
   submitted = false;
 
@@ -26,6 +27,8 @@ export class ReportPage {
     }
   }
   submitReport(report){
-
+this.reportService.addReport(report).then(res=>{
+  console.log(res);
+});
   }
 }

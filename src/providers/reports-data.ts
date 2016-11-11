@@ -5,8 +5,10 @@ import {Http} from '@angular/http';
 @Injectable()
 export class ReportService {
   data: any;
+    apiUrl:string;
 
   constructor(public http: Http) {
+      this.apiUrl='http://irham2531-patient-report.wso2apps.com/services/report_DataService/';
   }
 
   load() {
@@ -27,5 +29,20 @@ export class ReportService {
         resolve(this.data);
       });
     });
+  }
+
+  addReport(report){
+      let url=this.apiUrl+"insert";
+      //let headers = new Headers();
+      //this.createAuthorizationHeader(headers);
+      let insertRequest= {
+          "_postinsert": report
+      };
+      console.log(insertRequest);
+      return new Promise(resolve => {
+          this.http.post(url,JSON.stringify(insertRequest)).subscribe(res => {
+              resolve(res);
+          })
+      });
   }
 }
