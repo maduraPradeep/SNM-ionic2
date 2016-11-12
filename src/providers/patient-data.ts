@@ -4,7 +4,7 @@
 import {Injectable} from '@angular/core';
 
 
-import {Http} from '@angular/http';
+import {Http,Headers} from '@angular/http';
 import {AuthService} from "./auth-service";
 import {Storage} from '@ionic/storage';
 @Injectable()
@@ -13,7 +13,7 @@ export class PatientService {
     storage: Storage = new Storage();
     otpApiUrl:string;
   constructor(public http: Http,public authService:AuthService) {
-      this.otpApiUrl="http://irham2531-smsemail-4-0.wso2apps.com/services/twilioRest";
+      this.otpApiUrl="http://irham2531-smsemail-5-0.wso2apps.com/services/twilioRest";
   }
 
   load() {
@@ -64,22 +64,28 @@ export class PatientService {
   getApproval() {
 
   }
-
-  requestOTP(patient,doctor) {
+    createHeaders(headers:Headers) {
+        headers.append('accept','application/json');
+        headers.append('Content-Type','application/json');
+    }
+  requestOTP(patient,doctor,callback) {
+      let headers = new Headers();
+      this.createHeaders(headers);
       let url=this.otpApiUrl;
       let request={
           "doctorId":111,
           "patientId":222,
           "status":"Pending",
-          "to":patient.mobile,
+          "to":"+94777888452",
           "from":"+17035968902",
           "statusCallbackUrl":"http://demo.twilio.com/docs/statuscallback.xml"
       };
       console.log("Sending otp...");
-      this.http.post(url,JSON.stringify(request)).subscribe(res=>{
-          console.log(res);
-      });
-
+          this.http.post(url, JSON.stringify(request),{headers:headers}).subscribe(res=> {
+              console.log(res);
+              callback(null, res.json());
+          });
+//TODO: handle error response
     //callback(null, patient);
   }
 

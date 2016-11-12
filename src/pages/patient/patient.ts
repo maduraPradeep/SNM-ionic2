@@ -43,36 +43,38 @@ export class PatientPage {
 
   requestAccess(patient) {
     var ctx=this;
-      let code=1234;
-      this.patientService.requestOTP(patient,this.user);
-      let alert = ctx.alertCtrl.create({
-          title: 'Enter OTP',
-          inputs: [
-              {
-                  name: 'Access code',
-                  placeholder: 'Enter access code'
-              }
-          ],
-          buttons: [
-              {
-                  text: 'Cancel',
-                  role: 'cancel',
-                  handler: data => {
-                      console.log('Cancel clicked');
+      let code="1234";
+      this.patientService.requestOTP(patient,this.user,function(err,res){
+          let alert = ctx.alertCtrl.create({
+              title: 'Enter OTP',
+              inputs: [
+                  {
+                      name: 'Access code',
+                      placeholder: 'Enter access code'
                   }
-              },
-              {
-                  text: 'View',
-                  handler: data => {
-                      console.log(data);
-                      if(data===code) {
-                          ctx.navCtrl.push(PatientDetailsPage, patient);
+              ],
+              buttons: [
+                  {
+                      text: 'Cancel',
+                      role: 'cancel',
+                      handler: data => {
+                          console.log('Cancel clicked');
+                      }
+                  },
+                  {
+                      text: 'View',
+                      handler: data => {
+                          console.log(data);
+                          if(data===code) {
+                              ctx.navCtrl.push(PatientDetailsPage, patient);
+                          }
                       }
                   }
-              }
-          ]
+              ]
+          });
+          alert.present();
       });
-      alert.present();
+
     /*this.patientService.requestOTP(patient,this.user, function (err, response) {
       if (err) {
 
