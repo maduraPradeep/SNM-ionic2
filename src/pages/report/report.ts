@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {ReportService} from "../../providers/reports-data";
+import {AuthService} from "../../providers/auth-service";
 
 /*
   Generated class for the Report page.
@@ -13,10 +14,13 @@ import {ReportService} from "../../providers/reports-data";
   templateUrl: 'report.html'
 })
 export class ReportPage {
+    report: {report_name?: string, report_type?: string,description?:string,param_1?:number,param_2?:string,date?:string,patient_id?:string} = {};
+    submitted = false;
+  constructor(public navCtrl: NavController,public reportService:ReportService,public authService:AuthService) {
+      let user=this.authService.getProfile();
+      this.report.patient_id=user['user_id'];
+  }
 
-  constructor(public navCtrl: NavController,public reportService:ReportService) {}
-  report: {report_name?: string, report_type?: string,description?:string,param_1?:number,param_2?:string,date?:string} = {};
-  submitted = false;
 
   onLogin(form) {
     this.submitted = true;
@@ -27,6 +31,7 @@ export class ReportPage {
     }
   }
   submitReport(report){
+
 this.reportService.addReport(report).then(res=>{
   console.log(res);
 });

@@ -20,7 +20,7 @@
     <form #signupForm="ngForm" novalidate>
       <ion-item>
         <ion-label floating color="primary">Username</ion-label>
-        <ion-input [(ngModel)]="signup.username" name="username" type="text" #username="ngModel" required>
+        <ion-input [(ngModel)]="signup.user_name" name="username" type="text" #username="ngModel" required>
         </ion-input>
       </ion-item>
       <p [hidden]="username.valid || submitted == false" color="danger" padding-left>
@@ -38,7 +38,7 @@
       <div *ngIf="!isDoctor">
       <ion-item>
         <ion-label floating color="primary">First Name</ion-label>
-        <ion-input [(ngModel)]="signup.firstname" name="firstname" type="text" #firstname="ngModel" required>
+        <ion-input [(ngModel)]="signup.first_name" name="firstname" type="text" #firstname="ngModel" required>
         </ion-input>
       </ion-item>
       <p [hidden]="firstname.valid || submitted == false" color="danger" padding-left>
@@ -46,7 +46,7 @@
       </p>
       <ion-item>
         <ion-label floating color="primary">Last Name</ion-label>
-        <ion-input [(ngModel)]="signup.lastname" name="lastname" type="text" #lastname="ngModel" required>
+        <ion-input [(ngModel)]="signup.last_name" name="lastname" type="text" #lastname="ngModel" required>
         </ion-input>
       </ion-item>
       <p [hidden]="lastname.valid || submitted == false" color="danger" padding-left>

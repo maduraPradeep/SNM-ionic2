@@ -62,7 +62,7 @@ export class DoctorService {
         resolve(res.json());
       })
     });*/
-      let auth0User={"connection":"Username-Password-Authentication","email":userObj.email,"username":userObj.namename,"password":userObj.password,"user_metadata":{},"email_verified":false,"app_metadata":{"roles":["doctor"]},"name":userObj.name};
+      let auth0User={"connection":"Username-Password-Authentication","email":userObj.email,"password":userObj.password,"user_metadata":{},"email_verified":false,"app_metadata":{"roles":["doctor"]},"name":userObj.name};
       return new Promise(resolve => {
           this.authService.signup(auth0User).then(res=>{
 console.log(res);

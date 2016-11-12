@@ -27,9 +27,9 @@ export class PatientDetailsPage {
   }
 
   getReports() {
-    this.reportService.load().then(data=> {
+    this.reportService.filter(this.patient['id']).then(data=> {
       console.log(data);
-      return this.reports = data;
+      this.reports = data;
     });
   };
 }

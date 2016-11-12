@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 
+import {Storage} from '@ionic/storage';
 
 import {Http} from '@angular/http';
 @Injectable()
 export class ReportService {
   data: any;
     apiUrl:string;
-
+    storage: Storage = new Storage();
   constructor(public http: Http) {
       this.apiUrl='http://irham2531-patient-report.wso2apps.com/services/report_DataService/';
   }
@@ -16,23 +17,35 @@ export class ReportService {
       // already loaded data
       return Promise.resolve(this.data);
     }
-
-    // don't have the data yet
-    return new Promise(resolve => {
-      // We're using Angular Http provider to request the data,
-      // then on the response it'll map the JSON data to a parsed JS object.
-      // Next we process the data and resolve the promise with the new data.
-      this.http.get('assets/data/reports.json').subscribe(res => {
-        // we've got back the raw data, now generate the core schedule data
-        // and save the data for later reference
-        this.data = res.json();
-        resolve(this.data);
+      return new Promise(resolve => {
+          this.storage.get('reports').then(report => {
+              if (report) {
+                  console.log(report);
+                  this.data = JSON.parse(report);
+                  resolve(this.data);
+              } else {
+                  this.http.get('assets/data/reports.json').subscribe(res => {
+                      this.data = res.json();
+                      this.storage.set('reports', JSON.stringify(this.data));
+                      resolve(this.data);
+                  });
+              }
+          }).catch(error => {
+              console.log(error);
+          });
       });
-    });
   }
 
   addReport(report){
-      let url=this.apiUrl+"insert";
+      report.report_id=(Math.floor(Math.random()*1000)).toString();
+      return new Promise(resolve => {
+          this.load().then(data=> {
+              this.data.push(report);
+              this.storage.set('reports', JSON.stringify(this.data));
+              resolve(this.data);
+          });
+      });
+      /*let url=this.apiUrl+"insert";
       //let headers = new Headers();
       //this.createAuthorizationHeader(headers);
       let insertRequest= {
@@ -43,6 +56,15 @@ export class ReportService {
           this.http.post(url,JSON.stringify(insertRequest)).subscribe(res => {
               resolve(res);
           })
-      });
+      });*/
+
+
+  }
+  filter(patientId){
+      return this.load().then(data=>{
+            return data.filter((item) => {
+                 item.patient_id=patientId;
+             });
+         });
   }
 }
