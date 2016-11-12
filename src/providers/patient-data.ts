@@ -13,7 +13,7 @@ export class PatientService {
     storage: Storage = new Storage();
     otpApiUrl:string;
   constructor(public http: Http,public authService:AuthService) {
-      this.otpApiUrl="http://irham2531-smsemail-5-0.wso2apps.com/services/twilioRest";
+      this.otpApiUrl="https://gateway.api.cloud.wso2.com:443/t/irham2531/send/1.0/services/twilioRest";
   }
 
   load() {
@@ -21,7 +21,7 @@ export class PatientService {
       // already loaded data
       return Promise.resolve(this.data);
     }
-      return new Promise(resolve => {
+      return new Promise((resolve,reject) => {
           // We're using Angular Http provider to request the data,
           // then on the response it'll map the JSON data to a parsed JS object.
           // Next we process the data and resolve the promise with the new data.
@@ -67,6 +67,7 @@ export class PatientService {
     createHeaders(headers:Headers) {
         headers.append('accept','application/json');
         headers.append('Content-Type','application/json');
+        headers.append('Authorization','Bearer eee171bd-38a7-3acb-964b-259fbd347a53');
     }
   requestOTP(patient,doctor,callback) {
       let headers = new Headers();
@@ -81,6 +82,7 @@ export class PatientService {
           "statusCallbackUrl":"http://demo.twilio.com/docs/statuscallback.xml"
       };
       console.log("Sending otp...");
+
           this.http.post(url, JSON.stringify(request),{headers:headers}).subscribe(res=> {
               console.log(res);
               callback(null, res.json());

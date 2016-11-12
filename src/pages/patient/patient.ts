@@ -45,34 +45,43 @@ export class PatientPage {
     var ctx=this;
       let code="1234";
       this.patientService.requestOTP(patient,this.user,function(err,res){
-          let alert = ctx.alertCtrl.create({
-              title: 'Enter OTP',
-              inputs: [
-                  {
-                      name: 'Access code',
-                      placeholder: 'Enter access code'
-                  }
-              ],
-              buttons: [
-                  {
-                      text: 'Cancel',
-                      role: 'cancel',
-                      handler: data => {
-                          console.log('Cancel clicked');
+
+          if(err) {
+
+          }else {
+              code=res.SMS.toString();
+              let alert = ctx.alertCtrl.create({
+                  title: 'Enter OTP',
+                  inputs: [
+                      {
+                          name: 'code',
+                          placeholder: 'Enter access code'
                       }
-                  },
-                  {
-                      text: 'View',
-                      handler: data => {
-                          console.log(data);
-                          if(data===code) {
+                  ],
+                  buttons: [
+                      {
+                          text: 'Cancel',
+                          role: 'cancel',
+                          handler: data => {
+                              console.log('Cancel clicked');
+                          }
+                      },
+                      {
+                          text: 'View',
+                          handler: data => {
+                              console.log(data);
+                              console.log(data.code===code);
+                               if(data.code===code) {
                               ctx.navCtrl.push(PatientDetailsPage, patient);
+                               }else{
+                                   console.log("Invalid code");
+                               }
                           }
                       }
-                  }
-              ]
-          });
-          alert.present();
+                  ]
+              });
+              alert.present();
+          }
       });
 
     /*this.patientService.requestOTP(patient,this.user, function (err, response) {
