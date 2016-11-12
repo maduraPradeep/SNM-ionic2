@@ -12,9 +12,11 @@ export class DoctorService {
   data: any;
   filter: any;
   apiUrl:any;
+    otpApiUrl:string;
     storage: Storage = new Storage();
   constructor(public http: Http,public authService:AuthService) {
       this.apiUrl= "http://localhost:8280/doctor/1.0.0/";
+      this.otpApiUrl="http://irham2531-smsemail-4-0.wso2apps.com/services/twilioRest";
   }
     createAuthorizationHeader(headers:Headers) {
         headers.append('Authorization','Bearer 4ceae6ae-587e-33f9-a603-d768cdaea67a');

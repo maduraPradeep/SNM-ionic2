@@ -11,8 +11,9 @@ import {Storage} from '@ionic/storage';
 export class PatientService {
   data: any;
     storage: Storage = new Storage();
-
+    otpApiUrl:string;
   constructor(public http: Http,public authService:AuthService) {
+      this.otpApiUrl="http://irham2531-smsemail-4-0.wso2apps.com/services/twilioRest";
   }
 
   load() {
@@ -64,10 +65,22 @@ export class PatientService {
 
   }
 
-  requestOTP(patient, callback) {
+  requestOTP(patient,doctor) {
+      let url=this.otpApiUrl;
+      let request={
+          "doctorId":111,
+          "patientId":222,
+          "status":"Pending",
+          "to":patient.mobile,
+          "from":"+17035968902",
+          "statusCallbackUrl":"http://demo.twilio.com/docs/statuscallback.xml"
+      };
+      console.log("Sending otp...");
+      this.http.post(url,JSON.stringify(request)).subscribe(res=>{
+          console.log(res);
+      });
 
-    console.log("Sending otp...");
-    callback(null, patient);
+    //callback(null, patient);
   }
 
   signup(userObj){

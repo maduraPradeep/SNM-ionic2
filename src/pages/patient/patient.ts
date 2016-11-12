@@ -8,6 +8,7 @@ import {
 
 import {PatientService} from '../../providers/patient-data';
 import { PatientDetailsPage } from '../patient-details/patient-details';
+import {AuthService} from "../../providers/auth-service";
 @Component({
   selector: 'page-patient',
   templateUrl: 'patient.html'
@@ -15,11 +16,13 @@ import { PatientDetailsPage } from '../patient-details/patient-details';
 export class PatientPage {
   queryText = '';
   patients = [];
+  user:any;
 
   constructor(public app: App,
               public navCtrl: NavController,
               public patientService: PatientService,
-              private alertCtrl: AlertController) {
+              private alertCtrl: AlertController,private authService:AuthService) {
+      this.user=this.authService.getProfile();
 
   }
 
@@ -40,7 +43,37 @@ export class PatientPage {
 
   requestAccess(patient) {
     var ctx=this;
-    this.patientService.requestOTP(patient, function (err, response) {
+      let code=1234;
+      this.patientService.requestOTP(patient,this.user);
+      let alert = ctx.alertCtrl.create({
+          title: 'Enter OTP',
+          inputs: [
+              {
+                  name: 'Access code',
+                  placeholder: 'Enter access code'
+              }
+          ],
+          buttons: [
+              {
+                  text: 'Cancel',
+                  role: 'cancel',
+                  handler: data => {
+                      console.log('Cancel clicked');
+                  }
+              },
+              {
+                  text: 'View',
+                  handler: data => {
+                      console.log(data);
+                      if(data===code) {
+                          ctx.navCtrl.push(PatientDetailsPage, patient);
+                      }
+                  }
+              }
+          ]
+      });
+      alert.present();
+    /*this.patientService.requestOTP(patient,this.user, function (err, response) {
       if (err) {
 
       } else {
@@ -72,6 +105,6 @@ export class PatientPage {
         alert.present();
       }
     });
-
+*/
   }
 }
