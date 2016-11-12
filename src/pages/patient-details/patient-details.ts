@@ -27,6 +27,7 @@ export class PatientDetailsPage {
   }
 
   getReports() {
+    console.log(this.patient);
     this.reportService.filter(this.patient['id']).then(data=> {
       console.log(data);
       this.reports = data;

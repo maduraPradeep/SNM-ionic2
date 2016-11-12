@@ -11,7 +11,7 @@ import {PatientService} from "../../providers/patient-data";
   templateUrl: 'signup.html'
 })
 export class SignupPage {
-  signup: {user_name?: string, password?: string,first_name?:string,last_name?:string,email?:string,hospital?:string,speciality?:string,name?:string} = {};
+  signup: {user_name?: string, password?: string,first_name?:string,last_name?:string,email?:string,hospital?:string,speciality?:string,name?:string,mobile?:string,nic?:string} = {};
   submitted = false;
   isDoctor=false;
 

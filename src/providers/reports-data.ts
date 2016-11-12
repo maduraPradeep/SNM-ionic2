@@ -62,8 +62,9 @@ export class ReportService {
   }
   filter(patientId){
       return this.load().then(data=>{
+          console.log("PatientId:"+patientId);
             return data.filter((item) => {
-                 item.patient_id=patientId;
+                return item.patient_id===patientId;
              });
          });
   }

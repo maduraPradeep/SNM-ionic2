@@ -52,6 +52,23 @@
       <p [hidden]="lastname.valid || submitted == false" color="danger" padding-left>
         Last Name is required
       </p>
+        <ion-item>
+          <ion-label floating color="primary">Mobile</ion-label>
+          <ion-input [(ngModel)]="signup.mobile" name="mobile" type="text" #mobile="ngModel" required>
+          </ion-input>
+        </ion-item>
+        <p [hidden]="mobile.valid || submitted == false" color="danger" padding-left>
+          NIC is required
+        </p>
+        <ion-item>
+          <ion-label floating color="primary">NIC</ion-label>
+          <ion-input [(ngModel)]="signup.nic" name="nic" type="text" #nic="ngModel" required>
+          </ion-input>
+        </ion-item>
+        <p [hidden]="nic.valid || submitted == false" color="danger" padding-left>
+          NIC is required
+        </p>
+
         </div>
       <ion-item>
         <ion-label floating color="primary">Email</ion-label>
